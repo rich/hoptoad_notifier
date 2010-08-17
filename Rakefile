@@ -9,7 +9,7 @@ task :default => [:test, :cucumber]
 
 desc 'Test the hoptoad_notifier gem.'
 Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
+  t.libs << ['lib', File.dirname(__FILE__)]
   t.pattern = 'test/**/*_test.rb'
   t.verbose = true
 end
@@ -114,7 +114,7 @@ require VERSION_FILE
 
 gemspec = Gem::Specification.new do |s|
   s.name        = %q{hoptoad_notifier}
-  s.version     = HoptoadNotifier::VERSION
+  s.version     = HoptoadNotifier::VERSION.dup
   s.summary     = %q{Send your application errors to our hosted service and reclaim your inbox.}
 
   s.files        = FileList['[A-Z]*', 'generators/**/*.*', 'lib/**/*.rb',
